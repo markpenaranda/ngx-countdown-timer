@@ -1,0 +1,28 @@
+{
+  "name": "ngx-countdown-timer",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/markpenaranda/ngx-countdown-timer"
+  },
+  "author": {
+    "name": "MJP",
+    "email": "markangelpenaranda@gmail.com"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/markpenaranda/ngx-countdown-timer/issues"
+  },
+  "main": "ngx-countdown-timer.umd.js",
+  "module": "ngx-countdown-timer.js",
+  "jsnext:main": "ngx-countdown-timer.js",
+  "typings": "ngx-countdown-timer.d.ts",
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
+  }
+}

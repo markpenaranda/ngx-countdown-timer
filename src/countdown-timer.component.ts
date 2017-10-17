@@ -23,8 +23,7 @@ export class CountdownTimer implements OnInit, OnDestroy{
     clearInterval(this.timer);
   }
 
-  getTimeDiff( datetime ) {
-
+  private getTimeDiff( datetime ) {
       datetime = new Date( datetime ).getTime();
       var now = new Date().getTime();
   
@@ -32,18 +31,19 @@ export class CountdownTimer implements OnInit, OnDestroy{
       {
           return "";
       }
-  
-      console.log( datetime + " " + now);
-  
-      if (datetime < now) {
-          var milisec_diff = now - datetime;
-      }else{
-          var milisec_diff = datetime - now;
-      }
+
+      var milisec_diff = datetime - now;
       var days = Math.floor(milisec_diff / 1000 / 60 / (60 * 24));
       var date_diff = new Date( milisec_diff );
-  
-      return days + "  "+ date_diff.getHours() + ":" + date_diff.getMinutes() + ":" + date_diff.getSeconds() + "";
+      var day_string = (days) ? this.twoDigit(days) + ":" : "";
+      
+      return day_string + this.twoDigit(date_diff.getHours()) +
+         ":" + this.twoDigit(date_diff.getMinutes()) + ":" 
+         + this.twoDigit(date_diff.getSeconds());
+  }
+
+  private twoDigit(number: number) {
+      return number > 9 ? "" + number: "0" + number;
   }
   
 }

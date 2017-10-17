@@ -51,7 +51,7 @@ Once your library is imported, you can use its components, directives and pipes 
 <h1>
   {{title}}
 </h1>
-<countdown-timer [end]="'2018-01-01 00:00:00'"></sampleComponent>
+<countdown-timer [end]="'2018-01-01 00:00:00'"></countdown-timer>
 ```
 
 ## Development

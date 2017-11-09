@@ -6,6 +6,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 })
 export class CountdownTimer implements OnInit, OnDestroy{
  
+  @Input() start;
   @Input() end;
   displayTime: string;
   timer: any;
@@ -14,8 +15,12 @@ export class CountdownTimer implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.timer = setInterval(() => { 
-        this.displayTime = this.getTimeDiff(this.end) 
+    this.timer = setInterval(() => {
+        if (this.start) {
+            this.displayTime = this.getTimeDiff(this.start, true);
+        } else {
+            this.displayTime = this.getTimeDiff(this.end);
+        }
       }, 1000);
   }
 
@@ -23,7 +28,7 @@ export class CountdownTimer implements OnInit, OnDestroy{
     clearInterval(this.timer);
   }
 
-  private getTimeDiff( datetime ) {
+  private getTimeDiff( datetime, useAsTimer = false ) {
       datetime = new Date( datetime ).getTime();
       var now = new Date().getTime();
   
@@ -33,6 +38,9 @@ export class CountdownTimer implements OnInit, OnDestroy{
       }
 
       var milisec_diff = datetime - now;
+      if (useAsTimer) {
+          milisec_diff = now - datetime;
+      }
       var days = Math.floor(milisec_diff / 1000 / 60 / (60 * 24));
       var date_diff = new Date( milisec_diff );
       var day_string = (days) ? this.twoDigit(days) + ":" : "";

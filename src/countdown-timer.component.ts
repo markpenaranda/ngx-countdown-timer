@@ -36,8 +36,9 @@ export class CountdownTimer implements OnInit, OnDestroy{
       var days = Math.floor(milisec_diff / 1000 / 60 / (60 * 24));
       var date_diff = new Date( milisec_diff );
       var day_string = (days) ? this.twoDigit(days) + ":" : "";
-      
-      return day_string + this.twoDigit(date_diff.getHours()) +
+
+      // Date() takes a UTC timestamp – getHours() gets hours in local time not in UTC. therefore we have to use getUTCHours()
+      return day_string + this.twoDigit(date_diff.getUTCHours()) +
          ":" + this.twoDigit(date_diff.getMinutes()) + ":" 
          + this.twoDigit(date_diff.getSeconds());
   }

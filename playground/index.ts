@@ -12,8 +12,12 @@ import { CountdownTimerModule }  from 'ngx-countdown-timer';
   selector: 'app',
   template: `
     <countdown-timer [end]="'2017-12-10 01:00:00'"></countdown-timer>
-    <countdown-timer [end]="'2017-10-30 01:00:00'"></countdown-timer>
-    <countdown-timer [end]="'2017-10-20 01:00:00'"></countdown-timer>
+    <countdown-timer [end]="'2018-01-01 01:00:00'"></countdown-timer>
+    <countdown-timer [end]="'2018-03-01 01:00:00'"></countdown-timer>
+    
+    <countdown-timer [start]="'2017-11-09 01:00:00'"></countdown-timer>
+    <countdown-timer [start]="'2017-10-30 01:00:00'"></countdown-timer>
+    <countdown-timer [start]="'2017-10-20 01:00:00'"></countdown-timer>
     `
 })
 class AppComponent {}

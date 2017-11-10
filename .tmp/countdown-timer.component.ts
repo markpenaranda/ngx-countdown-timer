@@ -17,6 +17,7 @@ export class CountdownTimer implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.stopTimer();
     this.timer = setInterval(() => { 
+        console.log(this.getTimeDiff(this.end) );
         this.displaytime = this.getTimeDiff(this.end);
       }, 1000);
   }
@@ -26,7 +27,7 @@ export class CountdownTimer implements OnInit, OnDestroy{
   }
 
   private getTimeDiff( datetime ) {
-
+    
       let now = new Date().getTime();
       let endDateString = new Date( datetime ).toUTCString();
       let end = new Date(endDateString).getTime();
@@ -38,6 +39,7 @@ export class CountdownTimer implements OnInit, OnDestroy{
      
       let diffInMs: number = end - now;
       var days = Math.floor(diffInMs / 1000 / 60 / (60 * 24));
+      console.log(diffInMs/1000/60/60)
       var date_diff = new Date( diffInMs );
       var day_string = (days) ? this.twoDigit(days) + ":" : "";
       

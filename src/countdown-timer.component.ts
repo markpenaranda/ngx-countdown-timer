@@ -6,18 +6,22 @@ import { Component, Input, OnInit, OnDestroy, ElementRef } from '@angular/core';
 })
 export class CountdownTimer implements OnInit, OnDestroy{
  
+  @Input() start;
   @Input() end;
   timer: any;
-  displaytime: any;
+  displayTime: any;
   constructor(
     private el: ElementRef
   ) {
   }
 
   ngOnInit(): void {
-    this.stopTimer();
-    this.timer = setInterval(() => { 
-        this.displaytime = this.getTimeDiff(this.end);
+    this.timer = setInterval(() => {
+        if (this.start) {
+            this.displayTime = this.getTimeDiff(this.start, true);
+        } else {
+            this.displayTime = this.getTimeDiff(this.end);
+        }
       }, 1000);
   }
 
@@ -25,27 +29,27 @@ export class CountdownTimer implements OnInit, OnDestroy{
     this.stopTimer();
   }
 
-  private getTimeDiff( datetime ) {
-
-      let now = new Date().getTime();
-      let endDateString = new Date( datetime ).toUTCString();
-      let end = new Date(endDateString).getTime();
-      if( isNaN(end) )
+  private getTimeDiff( datetime, useAsTimer = false ) {
+      datetime = new Date( datetime ).getTime();
+      var now = new Date().getTime();
+  
+      if( isNaN(datetime) )
       {
           return "";
       }
 
-     
-      let diffInMs: number = end - now;
-      var days = Math.floor(diffInMs / 1000 / 60 / (60 * 24));
-      var date_diff = new Date( diffInMs );
+      var milisec_diff = datetime - now;
+      if (useAsTimer) {
+          milisec_diff = now - datetime;
+      }
+      var days = Math.floor(milisec_diff / 1000 / 60 / (60 * 24));
+      var date_diff = new Date( milisec_diff );
       var day_string = (days) ? this.twoDigit(days) + ":" : "";
-      
-      
-      return day_string + this.twoDigit(date_diff.getUTCHours()) +
-         ":" + this.twoDigit(date_diff.getUTCMinutes()) + ":" 
-         + this.twoDigit(date_diff.getUTCSeconds());
 
+      // Date() takes a UTC timestamp – getHours() gets hours in local time not in UTC. therefore we have to use getUTCHours()
+      return day_string + this.twoDigit(date_diff.getUTCHours()) +
+         ":" + this.twoDigit(date_diff.getMinutes()) + ":" 
+         + this.twoDigit(date_diff.getSeconds());
   }
 
 

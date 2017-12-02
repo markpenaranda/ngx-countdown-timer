@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ElementRef, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core/src/event_emitter';
 
 @Component({
   selector: 'countdown-timer',
@@ -7,17 +8,20 @@ import { Component, Input, OnInit, OnDestroy, ElementRef } from '@angular/core';
 export class CountdownTimer implements OnInit, OnDestroy{
  
   @Input() end;
+  @Output() zeroTrigger;
   timer: any;
   displaytime: any;
   constructor(
     private el: ElementRef
   ) {
+    this.zeroTrigger = new EventEmitter(true);
   }
 
   ngOnInit(): void {
     this.stopTimer();
     this.timer = setInterval(() => { 
         this.displaytime = this.getTimeDiff(this.end);
+        this.zeroTrigger.emit();
       }, 1000);
   }
 

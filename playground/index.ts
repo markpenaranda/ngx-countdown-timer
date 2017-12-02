@@ -11,10 +11,14 @@ import { CountdownTimerModule }  from 'ngx-countdown-timer';
 @Component({
   selector: 'app',
   template: `
-  2017-11-10T12:00:00Z : <countdown-timer [end]="'2017-11-10T12:00:00Z'"></countdown-timer>
+  2017-11-10T12:00:00Z : <countdown-timer (zeroTrigger)="zeroFunction('nice')" [end]="'2017-11-10T12:00:00Z'"></countdown-timer>
     `
 })
-class AppComponent {}
+class AppComponent {
+  zeroFunction (hello) {
+    console.log(hello)
+  }
+}
 
 @NgModule({
   bootstrap: [ AppComponent ],

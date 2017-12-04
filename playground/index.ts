@@ -12,7 +12,7 @@ import { CountdownTimerModule }  from 'ngx-countdown-timer';
   selector: 'app',
   template: `
     <h3>Timer With Zero Trigger Function </h3>
-    <countdown-timer (zeroTrigger)="zeroFunction('nice')"  [end]="'2017-12-02 19:52:00'"></countdown-timer><br>
+    <countdown-timer (zeroTrigger)="zeroFunction('nice')" [timeOnly]="true" [end]="'2017-12-10 19:52:00'"></countdown-timer><br>
     
     <h3>Simple Countdown Timer </h3>
     <countdown-timer [end]="'2018-01-01 01:00:00'"></countdown-timer>
